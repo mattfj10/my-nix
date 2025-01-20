@@ -1,0 +1,90 @@
+BEGIN:VCALENDAR
+METHOD:REQUEST
+PRODID:Microsoft Exchange Server 2010
+VERSION:2.0
+BEGIN:VTIMEZONE
+TZID:Central Standard Time
+BEGIN:STANDARD
+DTSTART:16010101T020000
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0600
+RRULE:FREQ=YEARLY;INTERVAL=1;BYDAY=1SU;BYMONTH=11
+END:STANDARD
+BEGIN:DAYLIGHT
+DTSTART:16010101T020000
+TZOFFSETFROM:-0600
+TZOFFSETTO:-0500
+RRULE:FREQ=YEARLY;INTERVAL=1;BYDAY=2SU;BYMONTH=3
+END:DAYLIGHT
+END:VTIMEZONE
+BEGIN:VEVENT
+ORGANIZER;CN=Emmett Roberts (US):mailto:emmett.roberts@thompsonsoftwaresolu
+ tions.com
+ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE;CN=Daren Scot
+ t (US):mailto:daren.scott@thompsonsoftwaresolutions.com
+ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE;CN=William Co
+ llins (US):mailto:will.collins@thompsonsoftwaresolutions.com
+ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE;CN=Matthew Fo
+ rrester Jones:mailto:MattFJones@protonmail.com
+DESCRIPTION;LANGUAGE=en-US:\n______________________________________________
+ __________________________________\nMicrosoft Teams Need help?<https://aka
+ .ms/JoinTeamsMeeting?omkt=en-US>\nJoin the meeting now<https://teams.micro
+ soft.com/l/meetup-join/19%3ameeting_ZTMyNTMyN2EtMzFhNi00ODMwLWExNmUtNjY5Ym
+ IxMDJiZTg2%40thread.v2/0?context=%7b%22Tid%22%3a%22bcd2f523-b055-4bea-b9ec
+ -dc33b14bbaa1%22%2c%22Oid%22%3a%22ede6e981-12d6-4f0c-8728-5861236f3883%22%
+ 7d>\nMeeting ID: 260 807 282 589\nPasscode: Yh3GE3Hn\n____________________
+ ____________\nFor organizers: Meeting options<https://teams.microsoft.com/
+ meetingOptions/?organizerId=ede6e981-12d6-4f0c-8728-5861236f3883&tenantId=
+ bcd2f523-b055-4bea-b9ec-dc33b14bbaa1&threadId=19_meeting_ZTMyNTMyN2EtMzFhN
+ i00ODMwLWExNmUtNjY5YmIxMDJiZTg2@thread.v2&messageId=0&language=en-US>\n___
+ __________________________________________________________________________
+ ___\n
+UID:040000008200E00074C5B7101A82E00800000000D5FB126E067CDB01000000000000000
+ 0100000001FC8AE14A965DE488CEB88E4DE99F5A4
+SUMMARY;LANGUAGE=en-US:Interview with Matthew Jones (ATL)
+DTSTART;TZID=Central Standard Time:20250212T143000
+DTEND;TZID=Central Standard Time:20250212T153000
+CLASS:PUBLIC
+PRIORITY:5
+DTSTAMP:20250210T215503Z
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+SEQUENCE:0
+LOCATION;LANGUAGE=en-US:Microsoft Teams Meeting
+X-MICROSOFT-CDO-APPT-SEQUENCE:0
+X-MICROSOFT-CDO-OWNERAPPTID:2123518165
+X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INSTTYPE:0
+X-MICROSOFT-ONLINEMEETINGINFORMATION:{"OnlineMeetingChannelId":null\,"Onlin
+ eMeetingProvider":3}
+X-MICROSOFT-SKYPETEAMSMEETINGURL:https://teams.microsoft.com/l/meetup-join/
+ 19%3ameeting_ZTMyNTMyN2EtMzFhNi00ODMwLWExNmUtNjY5YmIxMDJiZTg2%40thread.v2/
+ 0?context=%7b%22Tid%22%3a%22bcd2f523-b055-4bea-b9ec-dc33b14bbaa1%22%2c%22O
+ id%22%3a%22ede6e981-12d6-4f0c-8728-5861236f3883%22%7d
+X-MICROSOFT-SCHEDULINGSERVICEUPDATEURL:https://api.scheduler.teams.microsof
+ t.com/teams/bcd2f523-b055-4bea-b9ec-dc33b14bbaa1/ede6e981-12d6-4f0c-8728-5
+ 861236f3883/19_meeting_ZTMyNTMyN2EtMzFhNi00ODMwLWExNmUtNjY5YmIxMDJiZTg2@th
+ read.v2/0
+X-MICROSOFT-SKYPETEAMSPROPERTIES:{"cid":"19:meeting_ZTMyNTMyN2EtMzFhNi00ODM
+ wLWExNmUtNjY5YmIxMDJiZTg2@thread.v2"\,"rid":0\,"mid":0\,"uid":null\,"priva
+ te":true\,"type":0}
+X-MICROSOFT-DONOTFORWARDMEETING:FALSE
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+X-MICROSOFT-REQUESTEDATTENDANCEMODE:DEFAULT
+X-MICROSOFT-ISRESPONSEREQUESTED:TRUE
+X-MICROSOFT-LOCATIONDISPLAYNAME:Microsoft Teams Meeting
+X-MICROSOFT-LOCATIONSOURCE:None
+X-MICROSOFT-LOCATIONS:[{"DisplayName":"Microsoft Teams Meeting"\,"LocationA
+ nnotation":""\,"LocationUri":""\,"LocationStreet":""\,"LocationCity":""\,"
+ LocationState":""\,"LocationCountry":""\,"LocationPostalCode":""\,"Locatio
+ nFullAddress":""}]
+BEGIN:VALARM
+DESCRIPTION:REMINDER
+TRIGGER;RELATED=START:-PT15M
+ACTION:DISPLAY
+END:VALARM
+END:VEVENT
+END:VCALENDAR
