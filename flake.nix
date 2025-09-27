@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "My system flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -35,7 +35,7 @@
           home-manager.nixosModules.default
           ./lib/common.nix
           ./lib/tools.nix
-          ./system.nix
+          ./system/system.nix
           ./lib/media.nix
           ./hardware-configuration.nix
         ];
