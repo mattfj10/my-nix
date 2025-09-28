@@ -13,9 +13,6 @@
     xdotool
     traceroute
     maim
-    dotnetCorePackages.dotnet_9.sdk
-    dotnetCorePackages.dotnet_9.runtime
-    omnisharp-roslyn
     vagrant
     (pkgs.writers.writeDashBin "vboxmanage" '' ${pkgs.virtualbox}/bin/VBoxManage "$@"'') # Added both these to get vbox management working
   ];

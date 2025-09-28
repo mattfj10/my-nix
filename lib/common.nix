@@ -41,18 +41,13 @@
           };
           "terminal.integrated.inheritEnv" = true;
           "workbench.iconTheme" = "vscode-icons";
-          "dotnet.server.path" = "${pkgs.omnisharp-roslyn}/bin/OmniSharp";
-          "omnisharp.useGlobalMono" = "always";
           "editor.minimap.enabled" = false;
-          "dotnet.server.useOmnisharp" = true;
         };
         extensions = with pkgs.vscode-extensions; [
           bbenoist.nix
           dracula-theme.theme-dracula
           vscodevim.vim
           vscode-icons-team.vscode-icons
-          ms-dotnettools.csharp
-          ms-dotnettools.csdevkit
           continue.continue
         ];
       };
