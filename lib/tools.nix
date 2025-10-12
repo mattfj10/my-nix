@@ -14,6 +14,6 @@
     traceroute
     maim
     vagrant
-    (pkgs.writers.writeDashBin "vboxmanage" '' ${pkgs.virtualbox}/bin/VBoxManage "$@"'') # Added both these to get vbox management working
+    # (pkgs.writers.writeDashBin "vboxmanage" '' ${pkgs.virtualbox}/bin/VBoxManage "$@"'') # Temporarily disabled due to VirtualBox build issues
   ];
 }

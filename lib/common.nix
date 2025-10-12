@@ -13,7 +13,10 @@
       obsidian
       openssh
       android-udev-rules
-      python314
+      (python3.withPackages (ps: with ps; [
+        i3ipc  # Custom i3ipc package
+        # Add other Python packages you need here
+      ]))
       signal-desktop
       todoist-electron
     ];

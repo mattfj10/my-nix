@@ -25,6 +25,7 @@
             altmod = "Mod2";
           in
           {
+            #Workspace management
             "${modifier}+1" = "workspace number 1";
             "${modifier}+2" = "workspace number 2";
             "${modifier}+3" = "workspace number 3";
@@ -34,6 +35,7 @@
             "${modifier}+7" = "workspace number 7";
             "${modifier}+8" = "workspace number 8";
             "${modifier}+9" = "workspace number 9";
+            "${modifier}+Shift+w" = "exec i3-rofi-workspace-switcher";
             "${modifier}+j" = "focus down";
             "${modifier}+k" = "focus up";
             "${modifier}+h" = "focus left";
@@ -71,11 +73,12 @@
             "${modifier}+y" = "split h";
             "${modifier}+minus" = "scratchpad show";
             "${modifier}+r" = "mode resize";
-            "${modifier}+w" = "layout stacking";
+            "${modifier}+w" = "exec i3-rofi-window-switcher"; #"layout stacking";
             "${modifier}+space" = "focus mode_toggle";
             "${modifier}+v" = "split v";
             "${modifier}+t" = "layout tabbed";
             "${altmod}+l" = "exec dm-tool lock";
+
             #Media Keys
             "XF86AudioPlay" = "exec playerctl play-pause";
             "XF86AudioNext" = "exec playerctl next";

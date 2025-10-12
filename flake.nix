@@ -23,10 +23,12 @@
       pkgs = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
+        overlays = [
+          (import ./overlays/i3ipc.nix)
+        ];
       };
     in
     {
-      nixpkgs.config.allowUnfree = true;
       nixosConfigurations.nixnado = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
@@ -37,7 +39,10 @@
           ./lib/tools.nix
           ./system/system.nix
           ./lib/media.nix
+          ./scripts/i3-scripts.nix
           ./hardware-configuration.nix
+          # Apply overlays to the system
+          { nixpkgs.overlays = [ (import ./overlays/i3ipc.nix) ]; }
         ];
       };
     };

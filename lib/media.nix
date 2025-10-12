@@ -17,7 +17,7 @@ in
       pcsx2
       spotify
       r2modman
-      snes9x-gtk
+      #snes9x-gtk
       (pkgs.writeShellScriptBin "view-file" ''
         cp ${file} $HOME/Downloads/filename
       '')
