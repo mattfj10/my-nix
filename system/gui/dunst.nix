@@ -2,9 +2,12 @@
     enable = true;
         settings = {
         global = {
-            show_indicators = true;  # Shows the "X" close button
-            mouse_left_click = "do_action";  # Click to close
-            mouse_right_click = "context";  # Right click for context menu
+            show_indicators = true;  # Shows action indicators
+            mouse_left_click = "close_current";  # Left click to close notification
+            mouse_middle_click = "do_action";  # Middle click for actions
+            mouse_right_click = "close_all";  # Right click to close all notifications
+            close = "ctrl+space";  # Keyboard shortcut to close notification
+            close_all = "ctrl+shift+space";  # Keyboard shortcut to close all notifications
             # Icon settings
             enable_recursive_icon_lookup = true;
             icon_theme = "Adwaita";
