@@ -3,6 +3,7 @@
   home-manager,
   services,
   lib,
+  config,
   ...
 }:
 {
@@ -26,6 +27,7 @@
       playerctl
       pulseaudio
       rar
+      config.boot.kernelPackages.kernel.dev
     ];
   };
 
@@ -124,7 +126,7 @@
       owner = "newmanls";
       repo = "rofi-themes-collection";
       rev = "master";
-      sha256 = "sha256-pHPhqbRFNhs1Se2x/EhVe8Ggegt7/r9UZRocHlIUZKY=";
+      sha256 = "sha256-96wSyOp++1nXomnl8rbX5vMzaqRhTi/N7FUq6y0ukS8=";
     };
 
   };
