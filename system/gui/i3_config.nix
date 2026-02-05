@@ -8,6 +8,9 @@
         exec --no-startup-id ${pkgs.psmisc}/bin/killall -q .polybar-wrappe; polybar main &
         exec feh --bg-fill ~/nixos-config/media/wallpapers/snowy_peaks_blue.jpg
         exec --no-startup-id conky -c ~/nixos-config/configs/conky.conf
+        exec --no-startup-id ${pkgs.lightlocker}/bin/light-locker --lock-on-suspend --idle-hint --lock-after-screensaver=300
+        exec_always --no-startup-id ${pkgs.xorg.xinput}/bin/xinput set-button-map 15 3 2 1
+        exec_always --no-startup-id ${pkgs.xorg.xinput}/bin/xinput set-button-map 12 3 2 1
       '';
       config = {
         bars = [ ];
@@ -35,13 +38,6 @@
             "${modifier}+7" = "workspace number 7";
             "${modifier}+8" = "workspace number 8";
             "${modifier}+9" = "workspace number 9";
-            "${modifier}+Shift+w" = "exec i3-rofi-workspace-switcher";
-            "${modifier}+j" = "focus down";
-            "${modifier}+k" = "focus up";
-            "${modifier}+h" = "focus left";
-            "${modifier}+l" = "focus right";
-            "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
-            "${modifier}+Right" = "focus right";
             "${modifier}+Shift+0" = "move container to workspace number 10";
             "${modifier}+Shift+1" = "move container to workspace number 1";
             "${modifier}+Shift+2" = "move container to workspace number 2";
@@ -52,32 +48,48 @@
             "${modifier}+Shift+7" = "move container to workspace number 7";
             "${modifier}+Shift+8" = "move container to workspace number 8";
             "${modifier}+Shift+9" = "move container to workspace number 9";
+            "${modifier}+Shift+w" = "exec i3-rofi-workspace-switcher";
+            
+
+            # Window management
+            "${modifier}+j" = "focus down";
+            "${modifier}+k" = "focus up";
+            "${modifier}+h" = "focus left";
+            "${modifier}+l" = "focus right";
+            "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
+            "${modifier}+Right" = "focus right";
             "${modifier}+Shift+j" = "move down";
             "${modifier}+Shift+h" = "move left";
             "${modifier}+Shift+l" = "move right";
             "${modifier}+Shift+k" = "move up";
-            "${modifier}+Shift+c" = "reload";
-            "${modifier}+Shift+e" = "exec i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes' 'i3-msg exit'";
-            "${modifier}+Shift+minus" = "move scratchpad";
-            "${modifier}+Shift+q" = "kill";
-            "${modifier}+Shift+r" = "restart";
             "${modifier}+Shift+space" = "floating toggle";
             "${modifier}+Shift+s" = "sticky toggle";
             "${modifier}+Up" = "focus up";
             "${modifier}+a" = "focus parent";
-            "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -show drun -icon-theme \"Papirus\" -show-icons";
-            "Ctrl+${modifier}+f" =
-              "exec ${pkgs.rofi}/bin/rofi -modi filebrowser -show filebrowser -icon-theme \"Papirus\" -show-icons";
             "${modifier}+e" = "layout toggle split";
             "${modifier}+f" = "fullscreen toggle";
             "${modifier}+y" = "split h";
-            "${modifier}+minus" = "scratchpad show";
             "${modifier}+r" = "mode resize";
             "${modifier}+w" = "exec i3-rofi-window-switcher"; #"layout stacking";
             "${modifier}+space" = "focus mode_toggle";
             "${modifier}+v" = "split v";
             "${modifier}+t" = "layout tabbed";
             "${altmod}+l" = "exec dm-tool lock";
+
+            # Applications
+            "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -show drun -icon-theme \"Papirus\" -show-icons";
+            "${modifier}+Shift+f" =
+              "exec ${pkgs.rofi}/bin/rofi -modi filebrowser -show filebrowser -icon-theme \"Papirus\" -show-icons";
+            "${modifier}+minus" = "scratchpad show";
+
+            
+            #I3 management
+            "${modifier}+Shift+c" = "reload";
+            "${modifier}+Shift+e" = "exec i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes' 'i3-msg exit'";
+            "${modifier}+Shift+minus" = "move scratchpad";
+            "${modifier}+Shift+q" = "kill";
+            "${modifier}+Shift+r" = "restart";
+            "${modifier}+s" = "mode system";
 
             #Media Keys
             "XF86AudioPlay" = "exec playerctl play-pause";
@@ -95,6 +107,17 @@
             "Ctrl+Shift+Print" = "exec --no-startup-id maim --select | xclip -selection clipboard -t image/png";
             "Ctrl+${modifier}+Print" = "exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png";
           };
+        
+        modes = {
+          system = {
+            l = "exec ${pkgs.lightlocker}/bin/light-locker-command -l, mode default";
+            e = "exec i3-msg exit, mode default";
+            r = "exec systemctl reboot, mode default";
+            s = "exec systemctl poweroff, mode default";
+            Escape = "mode default";
+            Return = "mode default";
+          };
+        };
       };
     };
 }

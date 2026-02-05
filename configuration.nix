@@ -12,8 +12,9 @@
 {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
-  
   boot.loader.efi.canTouchEfiVariables = true;
+  # Pin Linux kernel to 6.12.x series (exact patch depends on pinned nixpkgs)
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   networking.hostName = "nixnado"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -48,7 +49,6 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-  services.udev.packages = [pkgs.android-udev-rules];
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tornado711 = {
     isNormalUser = true;
@@ -63,9 +63,30 @@
   };
 
   # Temporarily disabled due to compilation issues with VirtualBox 7.2.0 and newer CURL
-  # virtualisation.virtualbox.host.enable = true;
-  # virtualisation.virtualbox.host.enableExtensionPack = true;
-  # users.extraGroups.vboxusers.members = [ "tornado711" ];
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  users.extraGroups.vboxusers.members = [ "tornado711" ];
+
+  # Enable OCI containers (Podman)
+  virtualisation.oci-containers.backend = "podman";
+
+  # Calibre-web container
+  virtualisation.oci-containers.containers.calibre-web = {
+    image = "lscr.io/linuxserver/calibre-web:latest";
+    ports = [ "8083:8083" ];
+    volumes = [
+      "/home/tornado711/Calibre Library:/books"
+      "/home/tornado711/calibre-web-config:/config"
+    ];
+    environment = {
+    PUID = "1000";        # <-- your uid
+    PGID = "100";         # <-- your gid
+    TZ   = "America/New_York"; # or whatever
+    };
+  };
+
+  # Open firewall port for calibre-web
+  networking.firewall.allowedTCPPorts = [ 8083 ];
 
   # Install firefox.
   programs.firefox.enable = true;

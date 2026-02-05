@@ -25,6 +25,7 @@
         config.allowUnfree = true;
         overlays = [
           (import ./overlays/i3ipc.nix)
+          (import ./overlays/freetube.nix)
         ];
       };
     in
@@ -42,7 +43,10 @@
           ./scripts/i3-scripts.nix
           ./hardware-configuration.nix
           # Apply overlays to the system
-          { nixpkgs.overlays = [ (import ./overlays/i3ipc.nix) ]; }
+          { nixpkgs.overlays = [ 
+            (import ./overlays/i3ipc.nix)
+            (import ./overlays/freetube.nix)
+          ]; }
         ];
       };
     };

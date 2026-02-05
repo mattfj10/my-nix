@@ -17,6 +17,7 @@ in
       pcsx2
       spotify
       r2modman
+      unityhub
       #snes9x-gtk
       (pkgs.writeShellScriptBin "view-file" ''
         cp ${file} $HOME/Downloads/filename

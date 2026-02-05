@@ -80,6 +80,9 @@ programs = {
           co = "checkout";
           s = "status";
         };
+        extraConfig = {
+          pull.rebase = true;
+        };
       };
 
     };
