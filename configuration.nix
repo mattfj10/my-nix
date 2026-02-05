@@ -127,13 +127,19 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
 
-  # Nvidia drivers setup
+  # GPU driver for this machine. Change this line when building on a different system:
+  # - This machine (Nvidia): [ "nvidia" ]
+  # - Laptop with Intel onboard: [ "modesetting" ]
+  # - Laptop with AMD onboard: [ "amdgpu" ]
+  services.xserver.videoDrivers = [ "nvidia" ];
+
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
   };
 
-  hardware.nvidia = {
+  # Nvidia driver config — only used when "nvidia" is in videoDrivers above
+  hardware.nvidia = lib.mkIf (builtins.elem "nvidia" (config.services.xserver.videoDrivers or [])) {
 
     # Modesetting is required.
     modesetting.enable = true;

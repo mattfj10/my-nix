@@ -82,7 +82,6 @@
         layout = "us";
         variant = "";
       };
-      videoDrivers = [ "nvidia" ];
     };
 
     # Enable CUPS to print documents.
