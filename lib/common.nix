@@ -55,14 +55,15 @@
       };
     };
 
-    programs.chromium = {
+    # Use programs.brave (not programs.chromium) so extension config is written to
+    # ~/.config/BraveSoftware/Brave-Browser/External Extensions/ where Brave looks.
+    programs.brave = {
       enable = true;
-      package = pkgs.brave;
       extensions = [
-        { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; } # Vimium
-        { id = "nlgphodeccebbcnkgmokeegopgpnjfkc"; } # Super dark mode
-        { id = "eiaeiblijfjekdanodkjadfinkhbfgcd"; } # NordPass
-        { id = "ljflmlehinmoeknoonhibbjpldiijjmm"; } # Speechify
+        "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium
+        "nlgphodeccebbcnkgmokeegopgpnjfkc" # Super dark mode
+        "eiaeiblijfjekdanodkjadfinkhbfgcd" # NordPass
+        "ljflmlehinmoeknoonhibbjpldiijjmm" # Speechify
       ];
     };
 
