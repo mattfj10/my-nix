@@ -6,6 +6,7 @@
   config,
   lib,
   pkgs,
+  host,
   ...
 }:
 
@@ -127,11 +128,8 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
 
-  # GPU driver for this machine. Change this line when building on a different system:
-  # - This machine (Nvidia): [ "nvidia" ]
-  # - Laptop with Intel onboard: [ "modesetting" ]
-  # - Laptop with AMD onboard: [ "amdgpu" ]
-  services.xserver.videoDrivers = [ "nvidia" ];
+  # GPU driver: from host (desktop = nvidia, laptop = modesetting)
+  services.xserver.videoDrivers = if host.hasNvidia then [ "nvidia" ] else [ "modesetting" ];
 
   # Enable OpenGL
   hardware.graphics = {

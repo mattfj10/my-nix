@@ -28,26 +28,43 @@
           (import ./overlays/freetube.nix)
         ];
       };
+
+      baseModules = [
+        ./configuration.nix
+        home-manager.nixosModules.default
+        ./lib/common.nix
+        ./lib/tools.nix
+        ./system/system.nix
+        ./lib/media.nix
+        ./scripts/i3-scripts.nix
+        { nixpkgs.overlays = [
+          (import ./overlays/i3ipc.nix)
+          (import ./overlays/freetube.nix)
+        ]; }
+      ];
+
+      mkNixnado = host: nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs;
+          inherit host;
+        };
+        modules = baseModules ++ [ host.hardwareConfig ];
+      };
     in
     {
-      nixosConfigurations.nixnado = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./configuration.nix
-          home-manager.nixosModules.default
-          ./lib/common.nix
-          ./lib/tools.nix
-          ./system/system.nix
-          ./lib/media.nix
-          ./scripts/i3-scripts.nix
-          ./hardware-configuration.nix
-          # Apply overlays to the system
-          { nixpkgs.overlays = [ 
-            (import ./overlays/i3ipc.nix)
-            (import ./overlays/freetube.nix)
-          ]; }
-        ];
+      nixosConfigurations.nixnado_desktop = mkNixnado {
+        name = "nixnado_desktop";
+        isLaptop = false;
+        hasNvidia = true;
+        hardwareConfig = ./hardware-configuration-desktop.nix;
+      };
+
+      nixosConfigurations.nixnado_laptop = mkNixnado {
+        name = "nixnado_laptop";
+        isLaptop = true;
+        hasNvidia = false;
+        hardwareConfig = ./hardware-configuration-laptop.nix;
       };
     };
 }
