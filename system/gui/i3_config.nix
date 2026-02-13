@@ -1,5 +1,22 @@
-{pkgs, ...}:
+{pkgs, config, ...}:
+let
+  # Script with hardcoded paths; uses notify-send (dunst) for OSD since xob has compat issues
+  brightnessNotify = pkgs.writeShellScriptBin "brightness-notify" ''
+    case "$1" in
+      up)   ${pkgs.brightnessctl}/bin/brightnessctl -q set +5% ;;
+      down) ${pkgs.brightnessctl}/bin/brightnessctl -q set 5%- ;;
+      *)    echo "Usage: brightness-notify up|down" >&2; exit 1 ;;
+    esac
+    current=$(${pkgs.brightnessctl}/bin/brightnessctl get)
+    max=$(${pkgs.brightnessctl}/bin/brightnessctl max)
+    percent=$(( 100 * current / max ))
+    ${pkgs.libnotify}/bin/notify-send -t 600 -h string:x-dunst-stack-tag:brightness \
+      -h string:category:brightness "Brightness" "$percent%"
+  '';
+in
 {
+    home.packages = [ brightnessNotify ];
+
     # I3 CONFIG
     xsession.windowManager.i3 = {
       enable = true;
@@ -91,7 +108,9 @@
             "${modifier}+Shift+r" = "restart";
             "${modifier}+s" = "mode system";
 
-            #Media Keys
+            # Media Keys
+            "XF86MonBrightnessUp" = "exec ${brightnessNotify}/bin/brightness-notify up";
+            "XF86MonBrightnessDown" = "exec ${brightnessNotify}/bin/brightness-notify down";
             "XF86AudioPlay" = "exec playerctl play-pause";
             "XF86AudioNext" = "exec playerctl next";
             "XF86AudioPrev" = "exec playerctl previous";

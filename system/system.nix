@@ -93,6 +93,7 @@
 
   home-manager.users.tornado711 = {
     home.packages = with pkgs; [
+      brightnessctl
       i3status
       i3lock
       pavucontrol
