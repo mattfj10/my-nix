@@ -4,6 +4,7 @@
   services,
   lib,
   config,
+  host,
   ...
 }:
 {
@@ -106,7 +107,7 @@
         enable = true;
         extraConfig = builtins.readFile ../configs/conky.conf;
       };
-      polybar = import ./gui/polybar.nix {inherit pkgs;};
+      polybar = import ./gui/polybar.nix { inherit pkgs host lib; };
     };
 
     gtk = {

@@ -7,6 +7,7 @@
   home-manager.users.tornado711 = {
     home.packages = with pkgs; [
       code-cursor
+      claude-code
       direnv
       file
       librewolf

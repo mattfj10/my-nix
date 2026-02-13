@@ -1,4 +1,4 @@
-{pkgs}:
+{pkgs, host, lib}:
 {
         enable = true;
         script = "polybar main &";
@@ -33,7 +33,9 @@
             separator-foreground = "\${colors.disabled}";
             font-0 = "monospace:size=10;2";
             modules-left = "xworkspaces i3 xwindow";
-            modules-right = "filesystem pulseaudio xkeyboard memory cpu wlan eth date";
+            modules-right = if host.name == "nixnado_laptop"
+              then "filesystem pulseaudio xkeyboard memory cpu wlan eth battery date"
+              else "filesystem pulseaudio xkeyboard memory cpu wlan eth date";
             cursor-click = "pointer";
             cursor-scroll = "ns-resize";
             enable-ipc = true;
@@ -152,6 +154,31 @@
           "settings" = {
             screenchange-reload = true;
             pseudo-transparency = true;
+          };
+        }
+        // lib.optionalAttrs (host.name == "nixnado_laptop") {
+          "module/battery" = {
+            type = "internal/battery";
+            battery = "BAT0";
+            # Run `ls /sys/class/power_supply/` to find your battery/adapter names. Common: AC, ADP1 (ThinkPad), ACAD
+            adapter = "AC";
+            full-at = 98;
+            poll-interval = 5;
+            format-charging = "<ramp-capacity> <label-charging>";
+            format-charging-foreground = "\${colors.primary}";
+            label-charging = "CHR %percentage%%";
+            format-discharging = "<ramp-capacity> <label-discharging>";
+            format-discharging-foreground = "\${colors.primary}";
+            label-discharging = "BAT %percentage%%";
+            format-full = "<ramp-capacity> <label-full>";
+            format-full-foreground = "\${colors.primary}";
+            label-full = "BAT %percentage%%";
+            ramp-capacity-0 = "▁";
+            ramp-capacity-1 = "▂";
+            ramp-capacity-2 = "▃";
+            ramp-capacity-3 = "▄";
+            ramp-capacity-4 = "▅";
+            ramp-capacity-foreground = "\${colors.primary}";
           };
         };
 }
