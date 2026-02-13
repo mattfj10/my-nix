@@ -16,6 +16,7 @@
     };
 
     systemPackages = with pkgs; [
+      blueman
       feh
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       xclip
@@ -33,6 +34,11 @@
   };
 
   programs.dconf.enable = true;
+
+  # Make Qt apps follow system theme (and thus use dark mode)
+  qt.platformTheme = "gnome";
+
+  hardware.bluetooth.enable = true;
 
   services = {
     pulseaudio.enable = false;
