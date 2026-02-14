@@ -34,12 +34,19 @@
             font-0 = "monospace:size=10;2";
             modules-left = "xworkspaces i3 xwindow";
             modules-right = if host.name == "nixnado_laptop"
-              then "filesystem pulseaudio xkeyboard memory cpu wlan eth battery date"
-              else "filesystem pulseaudio xkeyboard memory cpu wlan eth date";
+              then "filesystem pulseaudio xkeyboard memory cpu wlan eth battery date tray"
+              else "filesystem pulseaudio xkeyboard memory cpu wlan eth date tray";
             cursor-click = "pointer";
             cursor-scroll = "ns-resize";
             enable-ipc = true;
             bottom = true;
+          };
+
+          "module/tray" = {
+            type = "internal/tray";
+            format-margin = "8px";
+            tray-spacing = "8px";
+            tray-size = "100%";
           };
 
           "module/xworkspaces" = {
