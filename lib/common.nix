@@ -4,6 +4,8 @@
   programs.noisetorch.enable = true;
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
+  # Avoid activation failure when a managed file already exists.
+  home-manager.backupFileExtension = "hm-bak";
   home-manager.users.tornado711 = {
     home.packages = with pkgs; [
       code-cursor
@@ -23,6 +25,11 @@
     ];
     home.stateVersion = "24.11";
     home.enableNixpkgsReleaseCheck = true;
+
+    home.file.".cursor/skills" = {
+      source = ../cursor/skills;
+      recursive = true;
+    };
 
     xdg.desktopEntries.nemo = { 
     name = "Nemo";
