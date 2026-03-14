@@ -10,11 +10,13 @@ in
     home.packages = with pkgs; [
       discord
       android-tools
+      audacity
       calibre
       dolphin-emu
       freetube
       libreoffice
       pcsx2
+      slack
       spotify
       r2modman
       unityhub
