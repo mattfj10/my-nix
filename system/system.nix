@@ -22,7 +22,7 @@
       xclip
       wget
       pkgs.home-manager
-      neofetch
+      fastfetch
       nix-direnv
       libnotify
       nixfmt-rfc-style

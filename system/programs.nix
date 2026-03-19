@@ -52,7 +52,7 @@ programs = {
         enableCompletion = true;
         syntaxHighlighting.enable = true;
         initContent = lib.mkBefore ''
-          neofetch
+          fastfetch
         '';
         defaultKeymap = "viins";
         oh-my-zsh = {
@@ -82,6 +82,14 @@ programs = {
         };
         extraConfig = {
           pull.rebase = true;
+        };
+      };
+
+      # GitHub CLI (integrates with git credential helper)
+      gh = {
+        enable = true;
+        settings = {
+          git_protocol = "https";
         };
       };
 
