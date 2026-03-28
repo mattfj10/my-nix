@@ -3,6 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    # Rolling package set; used only for signal-desktop so it stays newer than the main nixpkgs pin.
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nvf.url = "github:notashelf/nvf";
@@ -13,6 +15,7 @@
     inputs@{
       self,
       nixpkgs,
+      nixpkgs-unstable,
       home-manager,
       nvf,
       neovim-nightly-overlay,
@@ -27,6 +30,11 @@
           (import ./overlays/i3ipc.nix)
           (import ./overlays/freetube.nix)
         ];
+      };
+
+      pkgsSignal = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
       };
 
       baseModules = [
@@ -46,8 +54,7 @@
       mkNixnado = host: nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit inputs;
-          inherit host;
+          inherit inputs host pkgsSignal;
         };
         modules = baseModules ++ [ host.hardwareConfig ];
       };

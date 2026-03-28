@@ -1,4 +1,4 @@
-{ pkgs, home-manager, ... }:
+{ pkgs, pkgsSignal, home-manager, ... }:
 {
   nixpkgs.config.allowUnfree = true;
   programs.noisetorch.enable = true;
@@ -12,6 +12,8 @@
       cursor-cli
       claude-code
       direnv
+      kdePackages.dolphin
+      kdePackages.kio-extras
       file
       librewolf
       obsidian
@@ -20,7 +22,7 @@
         i3ipc  # Custom i3ipc package
         # Add other Python packages you need here
       ]))
-      signal-desktop
+      pkgsSignal.signal-desktop
       todoist-electron
     ];
     home.stateVersion = "24.11";
@@ -31,10 +33,13 @@
       recursive = true;
     };
 
-    xdg.desktopEntries.nemo = { 
-    name = "Nemo";
-    exec = "${pkgs.nemo-with-extensions}/bin/nemo";
-};
+    # Default file manager for “Open folder”, file pickers, and inode/directory links.
+    xdg.mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "inode/directory" = "org.kde.dolphin.desktop";
+      };
+    };
 
     programs.vscode = {
       enable = true;
