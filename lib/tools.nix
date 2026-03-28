@@ -12,6 +12,19 @@
     unzip
     xdotool
     traceroute
+    # scheme-small + extras for résumés / LaTeX Workshop (pdflatex + latexmk)
+    (texlive.combine {
+      inherit (texlive)
+        scheme-small
+        latexmk
+        preprint # fullpage.sty
+        titlesec
+        marvosym
+        enumitem
+        fancyhdr
+        babel
+        ;
+    })
     maim
     vagrant
     (pkgs.writers.writeDashBin "vboxmanage" '' ${pkgs.virtualbox}/bin/VBoxManage "$@"'')
