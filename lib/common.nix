@@ -1,16 +1,20 @@
-{ pkgs, pkgsSignal, home-manager, ... }:
+{
+  pkgs,
+  pkgsSignal,
+  home-manager,
+  ...
+}:
 {
   nixpkgs.config.allowUnfree = true;
-  programs.noisetorch.enable = true;
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   # Avoid activation failure when a managed file already exists.
   home-manager.backupFileExtension = "hm-bak";
   home-manager.users.tornado711 = {
     home.packages = with pkgs; [
+      claude-code
       code-cursor
       cursor-cli
-      claude-code
       direnv
       kdePackages.dolphin
       kdePackages.kio-extras
@@ -18,10 +22,12 @@
       librewolf
       obsidian
       openssh
-      (python3.withPackages (ps: with ps; [
-        i3ipc  # Custom i3ipc package
-        # Add other Python packages you need here
-      ]))
+      (python3.withPackages (
+        ps: with ps; [
+          i3ipc # Custom i3ipc package
+          # Add other Python packages you need here
+        ]
+      ))
       pkgsSignal.signal-desktop
       todoist-electron
     ];

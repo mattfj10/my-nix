@@ -57,8 +57,8 @@
     };
 
     clamav = {
-    daemon.enable = true;
-    updater.enable = true;
+      daemon.enable = true;
+      updater.enable = true;
     };
 
     pipewire = {
@@ -66,6 +66,44 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+      extraLadspaPackages = [ pkgs.rnnoise-plugin.ladspa ];
+      extraConfig.pipewire."99-input-denoising" = {
+        "context.modules" = [
+          {
+            name = "libpipewire-module-filter-chain";
+            args = {
+              "node.description" = "Noise Canceling Source";
+              "media.name" = "Noise Canceling Source";
+
+              "filter.graph" = {
+                nodes = [
+                  {
+                    type = "ladspa";
+                    name = "rnnoise";
+                    plugin = "librnnoise_ladspa";
+                    label = "noise_suppressor_mono";
+                    control = {
+                      "VAD Threshold (%)" = 50;
+                      "VAD Grace Period (ms)" = 200;
+                      "Retroactive VAD Grace (ms)" = 0;
+                    };
+                  }
+                ];
+              };
+
+              "capture.props" = {
+                "node.name" = "capture.rnnoise_source";
+                "node.passive" = true;
+              };
+
+              "playback.props" = {
+                "node.name" = "rnnoise_source";
+                "media.class" = "Audio/Source";
+              };
+            };
+          }
+        ];
+      };
     };
     xserver = {
       enable = true;
