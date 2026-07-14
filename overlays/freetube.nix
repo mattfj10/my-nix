@@ -1,11 +1,11 @@
 final: prev: {
   freetube = prev.appimageTools.wrapType2 rec {
     pname = "freetube";
-    version = "0.23.15-beta";
-    
+    version = "0.24.0-beta";
+
     src = prev.fetchurl {
       url = "https://github.com/FreeTubeApp/FreeTube/releases/download/v${version}/freetube-${version}-amd64.AppImage";
-      sha256 = "1v2zr65501359g05lp8rnkqb4ms2gja9g385kc8kvv4g26dcsd30";
+      sha256 = "0k3j4amgjnjijfng06qj43rs9zzg19i22c5nd3c75rzrvk0b0z7w";
     };
 
     extraPkgs = pkgs: with pkgs; [
@@ -81,10 +81,10 @@ final: prev: {
     '';
     
     meta = with prev.lib; {
-      description = "FreeTube 0.23.15-beta - An Open Source YouTube app for privacy";
+      description = "FreeTube 0.24.0-beta - An Open Source YouTube app for privacy";
       longDescription = ''
         FreeTube is an open source desktop YouTube player built with privacy in mind.
-        This is a custom build of version 0.23.15-beta which includes bug fixes not yet
+        This is a custom build of version 0.24.0-beta which includes bug fixes not yet
         available in the official nixpkgs repository.
       '';
       homepage = "https://freetubeapp.io/";
