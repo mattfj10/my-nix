@@ -60,8 +60,12 @@
       "adbusers"
       "wheel"
       "input"
+      "libvirtd"
+      "kvm"
     ];
   };
+
+  virtualisation.libvirtd.enable = true;
 
   # Temporarily disabled due to compilation issues with VirtualBox 7.2.0 and newer CURL
   virtualisation.virtualbox.host.enable = true;
