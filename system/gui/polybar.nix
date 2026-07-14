@@ -19,19 +19,19 @@
 
           "bar/main" = {
             width = "100%";
-            height = "12pt";
+            height = "24pt";
             radius = 6;
             background = "\${colors.background}";
             foreground = "\${colors.foreground}";
-            line-size = "3pt";
-            border-size = "4pt";
+            line-size = "4pt";
+            border-size = "6pt";
             border-color = "\${colors.background}";
             padding-left = 0;
-            padding-right = 1;
-            module-margin = 1;
+            padding-right = 2;
+            module-margin = 2;
             separator = "|";
             separator-foreground = "\${colors.disabled}";
-            font-0 = "monospace:size=10;2";
+            font-0 = "monospace:size=16;2";
             modules-left = "xworkspaces i3 xwindow";
             modules-right = if host.name == "nixnado_laptop"
               then "filesystem pulseaudio xkeyboard memory cpu wlan eth battery date tray"
@@ -44,9 +44,9 @@
 
           "module/tray" = {
             type = "internal/tray";
-            format-margin = "8px";
-            tray-spacing = "8px";
-            tray-size = "100%";
+            format-margin = "12px";
+            tray-spacing = "12px";
+            tray-size = "140%";
           };
 
           "module/xworkspaces" = {

@@ -1,4 +1,4 @@
-{pkgs, config, ...}:
+{pkgs, config, lib, host, ...}:
 let
   # Script with hardcoded paths; uses notify-send (dunst) for OSD since xob has compat issues
   brightnessNotify = pkgs.writeShellScriptBin "brightness-notify" ''
@@ -23,7 +23,7 @@ in
 
       extraConfig = ''
         exec --no-startup-id ${pkgs.psmisc}/bin/killall -q .polybar-wrappe; polybar main &
-        exec feh --bg-fill ~/nixos-config/media/wallpapers/snowy_peaks_blue.jpg
+        exec feh --bg-fill ~/nixos-config/media/wallpapers/snowy_peaks_4k.jpg
         exec --no-startup-id conky -c ~/nixos-config/configs/conky.conf
         exec --no-startup-id ${pkgs.lightlocker}/bin/light-locker --lock-on-suspend --idle-hint --lock-after-screensaver=300
         exec_always --no-startup-id ${pkgs.xorg.xinput}/bin/xinput set-button-map 15 3 2 1
@@ -39,6 +39,18 @@ in
         };
         modifier = "Mod1";
         terminal = "${pkgs.alacritty}/bin/alacritty";
+        workspaceOutputAssign = lib.optionals (host.name == "nixnado_desktop") [
+          { workspace = "1"; output = "DP-0"; }
+          { workspace = "2"; output = "DP-0"; }
+          { workspace = "3"; output = "DP-0"; }
+          { workspace = "4"; output = "DP-0"; }
+          { workspace = "5"; output = "DP-0"; }
+          { workspace = "6"; output = "HDMI-0"; }
+          { workspace = "7"; output = "HDMI-0"; }
+          { workspace = "8"; output = "HDMI-0"; }
+          { workspace = "9"; output = "HDMI-0"; }
+          { workspace = "10"; output = "HDMI-0"; }
+        ];
         keybindings =
           let
             modifier = "Mod4";
@@ -128,6 +140,18 @@ in
           };
         
         modes = {
+          resize = {
+            h = "resize shrink width 10 px or 10 ppt";
+            j = "resize grow height 10 px or 10 ppt";
+            k = "resize shrink height 10 px or 10 ppt";
+            l = "resize grow width 10 px or 10 ppt";
+            Left = "resize shrink width 10 px or 10 ppt";
+            Down = "resize grow height 10 px or 10 ppt";
+            Up = "resize shrink height 10 px or 10 ppt";
+            Right = "resize grow width 10 px or 10 ppt";
+            Return = "mode default";
+            Escape = "mode default";
+          };
           system = {
             l = "exec ${pkgs.lightlocker}/bin/light-locker-command -l, mode default";
             e = "exec i3-msg exit, mode default";

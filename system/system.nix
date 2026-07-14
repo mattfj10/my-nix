@@ -135,44 +135,56 @@
 
   hardware.steam-hardware.enable = true;
 
-  home-manager.users.tornado711 = {
-    home.packages = with pkgs; [
-      brightnessctl
-      i3status
-      i3lock
-      pavucontrol
-      lightlocker
-    ];
+  home-manager = {
+    # Forward flake host metadata into HM imports (e.g. i3_config.nix workspaceOutputAssign).
+    extraSpecialArgs = { inherit host; };
 
-    imports = [./gui/i3_config.nix ./programs.nix];
+    users.tornado711 = {
+      home.packages = with pkgs; [
+        brightnessctl
+        i3status
+        i3lock
+        pavucontrol
+        lightlocker
+      ];
 
-    services = {
-      dunst = import ./gui/dunst.nix;
-      conky = {
+      imports = [
+        ./gui/i3_config.nix
+        ./programs.nix
+      ];
+
+      xresources.properties = {
+        "Xft.dpi" = 144;
+      };
+
+      services = {
+        dunst = import ./gui/dunst.nix;
+        conky = {
+          enable = true;
+          extraConfig = builtins.readFile ../configs/conky.conf;
+        };
+        polybar = import ./gui/polybar.nix { inherit pkgs host lib; };
+      };
+
+      gtk = {
         enable = true;
-        extraConfig = builtins.readFile ../configs/conky.conf;
+        theme = {
+          package = pkgs.colloid-gtk-theme;
+          name = "colloid-gtk-theme";
+        };
+        iconTheme = {
+          package = pkgs.gruvbox-dark-icons-gtk;
+          name = "gruvbox-dark-icons-gtk";
+        };
       };
-      polybar = import ./gui/polybar.nix { inherit pkgs host lib; };
-    };
 
-    gtk = {
-      enable = true;
-      theme = {
-        package = pkgs.colloid-gtk-theme;
-        name = "colloid-gtk-theme";
+      home.file.".config/rofi/themes".source = pkgs.fetchFromGitHub {
+        owner = "newmanls";
+        repo = "rofi-themes-collection";
+        rev = "master";
+        sha256 = "sha256-96wSyOp++1nXomnl8rbX5vMzaqRhTi/N7FUq6y0ukS8=";
       };
-      iconTheme = {
-        package = pkgs.gruvbox-dark-icons-gtk;
-        name = "gruvbox-dark-icons-gtk";
-      };
-    };
 
-    home.file.".config/rofi/themes".source = pkgs.fetchFromGitHub {
-      owner = "newmanls";
-      repo = "rofi-themes-collection";
-      rev = "master";
-      sha256 = "sha256-96wSyOp++1nXomnl8rbX5vMzaqRhTi/N7FUq6y0ukS8=";
     };
-
   };
 }
