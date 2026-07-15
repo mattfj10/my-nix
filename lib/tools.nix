@@ -7,6 +7,7 @@
     # List your tools here
     clamav
     ghidra-bin
+    protonvpn-gui
     wireshark
     tcpdump
     unzip
@@ -29,4 +30,9 @@
     vagrant
     (pkgs.writers.writeDashBin "vboxmanage" '' ${pkgs.virtualbox}/bin/VBoxManage "$@"'')
   ];
+
+  # ProtonVPN GUI (and Signal/Slack/Discord) talk to the Secret Service API to
+  # persist login tokens. gnome-keyring provides that. Without it the Proton
+  # app errors out with "please make sure a system keyring is available".
+  services.gnome.gnome-keyring.enable = true;
 }
