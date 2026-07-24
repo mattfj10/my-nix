@@ -112,7 +112,6 @@
       displayManager = {
         defaultSession = "none+i3";
         gdm.enable = false;
-        gdm.wayland = false;
         lightdm = {
           greeters.gtk = {
             enable = true;
