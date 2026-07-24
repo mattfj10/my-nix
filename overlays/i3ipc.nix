@@ -1,6 +1,6 @@
-final: prev: {
+_final: prev: {
   python3 = prev.python3.override {
-    packageOverrides = python-final: python-prev: {
+    packageOverrides = _pythonFinal: python-prev: {
       i3ipc = python-prev.buildPythonPackage rec {
         pname = "i3ipc";
         version = "2.2.1";
