@@ -39,6 +39,24 @@ in
             proxyWebsockets = true;
           };
         };
+
+        "podcasts.mattforresterjones.com" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            extraConfig = ''
+              proxy_buffering off;
+              client_max_body_size 100M;
+            '';
+            proxyPass = "http://127.0.0.1:8040";
+            proxyWebsockets = true;
+          };
+        };
+
+        "rss.mattforresterjones.com" = {
+          enableACME = true;
+          forceSSL = true;
+        };
       };
     };
   };
