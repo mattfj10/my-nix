@@ -1,3 +1,4 @@
+{ config, ... }:
 {
   users.extraGroups.vboxusers.members = [ "tornado711" ];
 
@@ -12,7 +13,7 @@
           TZ = "America/New_York";
         };
         image = "lscr.io/linuxserver/calibre-web:latest";
-        ports = [ "8083:8083" ];
+        ports = if config.nixnado.isLaptop then [ "8083:8083" ] else [ "127.0.0.1:8083:8083" ];
         volumes = [
           "/home/tornado711/Calibre Library:/books"
           "/home/tornado711/calibre-web-config:/config"

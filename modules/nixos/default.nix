@@ -10,5 +10,6 @@
     ./packages/nix-tooling.nix
     ./security.nix
     ./virtualization.nix
+    ./web-proxy.nix
   ];
 }

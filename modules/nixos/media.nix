@@ -15,7 +15,7 @@ in
   services.jellyfin = lib.mkIf isDesktop {
     enable = true;
     group = "users";
-    openFirewall = true;
+    openFirewall = false;
     user = "tornado711";
   };
 
