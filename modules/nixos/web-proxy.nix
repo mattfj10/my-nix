@@ -16,6 +16,14 @@ in
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
 
+      streamConfig = ''
+        server {
+          listen 2222;
+          proxy_pass 127.0.0.1:22;
+          proxy_timeout 24h;
+        }
+      '';
+
       virtualHosts = {
         "calibre.mattforresterjones.com" = {
           enableACME = true;

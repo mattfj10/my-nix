@@ -11,6 +11,7 @@
     ./podcasts.nix
     ./rss.nix
     ./security.nix
+    ./tailscale.nix
     ./virtualization.nix
     ./web-proxy.nix
   ];

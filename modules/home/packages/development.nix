@@ -6,6 +6,7 @@
     code-cursor
     cursor-cli
     direnv
+    herdr
     openssh
     (python3.withPackages (pythonPackages: [ pythonPackages.i3ipc ]))
   ];

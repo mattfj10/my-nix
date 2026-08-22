@@ -55,6 +55,7 @@
         [
           80
           443
+          2222
         ];
     hostName = "nixnado";
     networkmanager.enable = true;
