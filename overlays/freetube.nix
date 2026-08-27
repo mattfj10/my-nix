@@ -1,11 +1,11 @@
 _final: prev: {
   freetube = prev.appimageTools.wrapType2 rec {
     pname = "freetube";
-    version = "0.25.1-beta";
+    version = "0.25.2-beta";
 
     src = prev.fetchurl {
       url = "https://github.com/FreeTubeApp/FreeTube/releases/download/v${version}/freetube-${version}-amd64.AppImage";
-      sha256 = "1qbn5y4rl65n05i3jk9jk3ld21skklhw138j50zcz0lg5hnk0f45";
+      sha256 = "sha256-Kgrn4ISb4C8RUQKPsz0GKGSqG8G2JjwG5bxeOLthdak=";
     };
 
     extraPkgs =
