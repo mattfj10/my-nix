@@ -5,5 +5,6 @@
     biglybt
     freetube
     spotify
+    vlc
   ];
 }
