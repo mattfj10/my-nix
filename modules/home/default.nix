@@ -1,5 +1,6 @@
 {
   config,
+  hermes-agent,
   pkgs,
   pkgsSignal,
   ...
@@ -12,7 +13,7 @@ in
     backupFileExtension = "hm-bak";
     extraSpecialArgs = {
       host = config.nixnado;
-      inherit localPkgs pkgsSignal;
+      inherit hermes-agent localPkgs pkgsSignal;
     };
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -42,6 +43,7 @@ in
         ./packages/virtualization.nix
         ./programs/browsers.nix
         ./programs/development.nix
+        ./programs/hermes.nix
         ./programs/shell.nix
       ];
     };

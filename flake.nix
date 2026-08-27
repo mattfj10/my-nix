@@ -2,6 +2,9 @@
   description = "Nixnado NixOS configurations";
 
   inputs = {
+    hermes-agent.url = "github:NousResearch/hermes-agent";
+    hermes-agent.inputs.home-manager.follows = "home-manager";
+    hermes-agent.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -12,6 +15,7 @@
   outputs =
     {
       self,
+      hermes-agent,
       home-manager,
       nixpkgs,
       nixpkgs-unstable,
@@ -43,7 +47,7 @@
         hostModule:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit pkgsSignal; };
+          specialArgs = { inherit hermes-agent pkgsSignal; };
           modules = baseModules ++ [ hostModule ];
         };
 
