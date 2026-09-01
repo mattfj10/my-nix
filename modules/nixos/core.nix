@@ -48,15 +48,11 @@
   };
 
   networking = {
-    firewall.allowedTCPPorts =
-      if config.nixnado.isLaptop then
-        [ 8083 ]
-      else
-        [
-          80
-          443
-          2222
-        ];
+    firewall.allowedTCPPorts = lib.optionals (!config.nixnado.isLaptop) [
+      80
+      443
+      2222
+    ];
     hostName = "nixnado";
     networkmanager.enable = true;
   };

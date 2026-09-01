@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   users.extraGroups.vboxusers.members = [ "tornado711" ];
 
@@ -6,18 +6,20 @@
     libvirtd.enable = true;
     oci-containers = {
       backend = "podman";
-      containers.calibre-web = {
-        environment = {
-          PGID = "100";
-          PUID = "1000";
-          TZ = "America/New_York";
+      containers = lib.optionalAttrs (!config.nixnado.isLaptop) {
+        calibre-web = {
+          environment = {
+            PGID = "100";
+            PUID = "1000";
+            TZ = "America/New_York";
+          };
+          image = "lscr.io/linuxserver/calibre-web:latest";
+          ports = [ "127.0.0.1:8083:8083" ];
+          volumes = [
+            "/home/tornado711/Calibre Library:/books"
+            "/home/tornado711/calibre-web-config:/config"
+          ];
         };
-        image = "lscr.io/linuxserver/calibre-web:latest";
-        ports = if config.nixnado.isLaptop then [ "8083:8083" ] else [ "127.0.0.1:8083:8083" ];
-        volumes = [
-          "/home/tornado711/Calibre Library:/books"
-          "/home/tornado711/calibre-web-config:/config"
-        ];
       };
     };
     virtualbox.host = {
